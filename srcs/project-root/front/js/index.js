@@ -1,54 +1,61 @@
-// Função para adicionar produto ao carrinho
-const productsListButtons = document.querySelectorAll(".add-to-cart");
-const msgAdd = document.querySelector(".msg-add");
+const removeProductsdButtons = document.getElementsByClassName("button-excluir")
 
-productsListButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const dataId = parseInt(
-      button.closest(".card-content").getAttribute("data-id")
-    );
-    AdicionarAoCarrinho(dataId);
-  });
-});
-
-function AdicionarAoCarrinho(id) {
-  const contentCard = document.querySelector(`.card-content[data-id="${id}"]`);
-  if (contentCard) {
-    const imgProduct = contentCard.querySelector(".card-img").src;
-    const name = contentCard.querySelector(".product-name").innerHTML;
-    const price = contentCard.querySelector(".product-price").innerHTML;
-
-    let ProductList =
-      JSON.parse(localStorage.getItem("Lista de Produtos")) || [];
-
-    const existingProductIndex = ProductList.findIndex(
-      (product) => product.Id === id
-    );
-    if (existingProductIndex > -1) {
-      ProductList[existingProductIndex].Quantity++;
-    } else {
-      const newProduct = {
-        Id: id,
-        ImgSrc: imgProduct,
-        Name: name,
-        Price: price,
-        Quantity: 1,
-      };
-      ProductList.push(newProduct);
-    }
-
-    localStorage.setItem("Lista de Produtos", JSON.stringify(ProductList));
-    localStorage.setItem("Número Itens", ProductList.length);
-    alert("Produto Adicionado com sucesso!");
-    atualizarNumeroItens(); // Atualizar o número de itens exibido
-  } else {
-    alert(`Erro: Não foi possível encontrar o cartão do produto com id ${id}.`);
-  }
+for (let i = 0; i < removeProductsdButtons.length; i++){
+  removeProductsdButtons[i].addEventListener("click", function(event){
+    event.target.parentElement.parentElement.remove()
+  })
 }
 
-// Função para atualizar o número de itens exibido
-function atualizarNumeroItens() {
-  const productList =
-    JSON.parse(localStorage.getItem("Lista de Produtos")) || [];
-  msgAdd.innerHTML = productList.length;
+
+  const cartProdcuts = document.getElementsByClassName("linhaofproducts")
+
+  for(let i = 0; i < cartProdcuts.length; i++){
+    let totalAmount = 0
+    let quantity = 1
+    
+    const button_diminuir = cartProdcuts[i].getElementsByClassName("button-diminuir")[0]
+    const button_aumentar = cartProdcuts[i].getElementsByClassName("button-aumentar")[0]
+    const productPrice = cartProdcuts[i].getElementsByClassName("product-price")[0].innerText.replace("R$", "").replace(",",".")
+    
+
+    button_diminuir.addEventListener("click", () =>{
+      const valueQuantity = cartProdcuts[i].getElementsByClassName("valor-quantidade")[0].innerText = quantity
+      if (quantity !== 1){
+        quantity -= 1
+        totalAmount -= valueQuantity * productPrice 
+        const productTotalPrice = cartProdcuts[i].getElementsByClassName("total-price")[0].innerHTML =  "R$" + totalAmount.toFixed(2)
+        const productPrice = cartProdcuts[i].getElementsByClassName("product-price")[0].innerText.replace("R$", "").replace(",",".")
+
+      } else {
+        alert("Erro. explicar o erro")
+      }
+
+      console.log(totalAmount)
+
+
+    })
+    button_aumentar.addEventListener("click", () => {
+      quantity += 1
+      const valueQuantity = cartProdcuts[i].getElementsByClassName("valor-quantidade")[0].innerText = quantity
+      totalAmount += valueQuantity * productPrice
+      const productTotalPrice = cartProdcuts[i].getElementsByClassName("total-price")[0].innerHTML =  "R$" + totalAmount.toFixed(2)
+      const productPrice = cartProdcuts[i].getElementsByClassName("product-price")[0].innerText.replace("R$", "").replace(",",".")
+
+
+
+    })
+   
+   
+    
+  }
+
+
+
+
+function addProductToCart(event){
+  const button = event.tagert
+  // primeiro pegar a div que engloba todas informações
+  const productInfos = button.parentElement
+  const productImage = productInfos.getElementsByClassName('card-img')
+  console.log(button)
 }

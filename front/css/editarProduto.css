@@ -1,0 +1,69 @@
+* {
+    box-sizing: border-box; /* Inclui o padding e a borda na largura total do contêiner */
+
+}
+nav {
+    height: 13vh;
+}
+header {
+    height: 10vh;
+}
+.headers-content {
+    color: #343a40;
+    display: flex;
+    padding: 0 6rem;
+    flex-direction: column;
+
+    margin-top: 10vh;
+}
+.container-button{
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    gap: 10px;
+}
+.custom-link {
+    color: white;
+    text-decoration: none;
+}
+.btn-color {
+    color: white!important;
+    background-color: #343a40!important;
+}
+.styled-table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 3px auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden; /* Garante que a borda arredondada funcione corretamente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+
+.styled-table thead {
+    background-color: #343a40; /* Cor escura para cabeçalhos */
+    color: #fff; /* Texto branco */
+}
+
+.styled-table th {
+    text-align: left;
+    font-size: 16px;
+    
+}
+td {
+    background-color: #808080;
+}
+
+.styled-table td, .styled-table th {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Usando seletores mais específicos para garantir que o estilo seja aplicado */
+input.form-control:focus, 
+textarea.form-control:focus, 
+select.form-control:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}

@@ -24,7 +24,9 @@ app.post('/usuario/cadastrarAdmin', (request, response) => {
     const {nome, email, senha,} = request.body 
 
     if (!nome || !email || !senha ){
-        return response.status(400).json({success: false, message: "Preencha todos os campos de cadastro"})
+        return response
+        .status(400)
+        .json({success: false, message: "Preencha todos os campos de cadastro"})
     }
 
     const queryAdmin = `SELECT * FROM Usuario WHERE status_permissão = 'ADMIN'`
@@ -77,6 +79,60 @@ app.post('/usuario/cadastrarAdmin', (request, response) => {
         
     })    
 })
+
+app.put('/usuario/atualizarAdmin/:id', (request, response) => {
+    const params = Array(
+        request.body.nome,
+        request.body.email,
+        request.body.senha,
+        request.params.id,
+        request.body.status_permissão
+    )
+
+    const query = `UPDATE Usuario
+        SET nome = ?, email = ?, senha = ? WHERE id_usuario = ? AND status_permissão = 'ADMIN'
+    `
+    connection.query(query, params, (err, result) => {
+        if (err){
+            response 
+            .status(400)
+            .json({success: false, message: 'Erro ao atualizar as informações', err})
+        } else {
+            response
+            .status(201)
+            .json({
+                sucess: true,
+                message: 'Sucesso ao atualizar as informações.'
+            })
+        }
+    }) 
+})
+app.delete('/usuario/deletarAdmin/:id', (request, response) => {
+    const params = Array(
+        request.params.id,
+        request.params.status_permissão
+    )
+    const query = `DELETE FROM Usuario WHERE id_usuario = ? AND status_permissão = ?`
+    connection.query(query, params, (err, result) => {
+        if (result) {
+            response
+                .status(201)
+                .json({
+                    message: "sucesso ao deletar adm",
+                    success: true,
+                    data: result
+                })
+        } else
+            response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "erro ao deletar adm",
+                    data: err
+                })
+    })
+})
+
 
 //ROTA POST CADASTRO DE USUÁRIOS TER ( CREATE, READ, UPDATE AND DELETE)
 app.post('/usuario/cadastrar', async (request, response) => {
@@ -418,10 +474,10 @@ app.delete('/product/deletar/:id', (request, response) => {
 // ROTA PARA TABELA DE FAVORITOS( CREATE, READ,UPDATE AND REMOVE)
 app.post('/cadastrar/favoritos', (request, response) => {
     let params = Array(
-        Usuario_Id,
-        Produto_Id
+        request.body.Usuario_Id,
+        request.body.Produto_Id
     )
-    let query = 'INSERT INTO Favoritos(Usuario_Id, Produto_Id) VALUES(?,?) WHERE Usuario_Id = ?, Produto_Id = ?'
+    let query = 'INSERT INTO Favoritos(UsuarioId, ProdutoId) VALUES(?,?)'
     connection.query(query, params, (err, result) => {
         if (result) {
             response

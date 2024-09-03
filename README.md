@@ -1,1 +1,1 @@
-## Nicolas's repositorio do Trabalho de técnico sobre a criação de um Mercado místico.
+## Nicolas's, Arthur Cardoso's, Rafaela Ferrado's repositorio do Trabalho de técnico sobre a criação de um Mercado místico.

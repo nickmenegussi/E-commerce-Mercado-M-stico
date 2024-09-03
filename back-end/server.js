@@ -474,8 +474,8 @@ app.delete('/product/deletar/:id', (request, response) => {
 // ROTA PARA TABELA DE FAVORITOS( CREATE, READ,UPDATE AND REMOVE)
 app.post('/cadastrar/favoritos', (request, response) => {
     let params = Array(
-        request.body.Usuario_Id,
-        request.body.Produto_Id
+        request.body.UsuarioId,
+        request.body.ProdutoId
     )
     let query = 'INSERT INTO Favoritos(UsuarioId, ProdutoId) VALUES(?,?)'
     connection.query(query, params, (err, result) => {

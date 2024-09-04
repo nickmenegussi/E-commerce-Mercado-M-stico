@@ -33,7 +33,7 @@ Instale as dependências: Certifique-se de ter o Node.js instalado. Em seguida, 
  ``` bash
   Copiar código
   npm install
-```
+
 Dependências:
 
 bcryptjs: "^2.4.3"
@@ -45,14 +45,15 @@ jsonwebtoken: "^9.0.2"
 multer: "^1.4.5-lts.1"
 mysql2: "^3.11.0"
 nodemon: "^3.1.4"
+```
 Execução
 Para iniciar o servidor, execute o seguinte comando:
 
 
- bash
-Copiar código
-npm start
-
+```bash
+  Copiar código
+  npm start
+```
 Rotas da API
 ## Usuários
 

@@ -30,9 +30,10 @@ Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
    cd E-commerce-Mercado-M-stico
 Instale as dependências: Certifique-se de ter o Node.js instalado. Em seguida, instale as dependências do projeto com:
 
-bash
-Copiar código
-npm install
+ ``` bash
+  Copiar código
+  npm install
+```
 Dependências:
 
 bcryptjs: "^2.4.3"
